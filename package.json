@@ -31,6 +31,7 @@
     "webpack-obj-loader": "^1.0.4"
   },
   "dependencies": {
+    "@types/p5": "^1.3.0",
     "p5": "^1.4.0"
   }
 }
