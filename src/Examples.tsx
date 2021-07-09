@@ -1,17 +1,21 @@
-import * as React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { render } from 'react-dom';
 import { TwoThreeDee } from './TwoThreeDee';
 
-const Test = () => {
+const Example = () => {
+
+  const containerEl = useRef();
+
+  useEffect(() => {
+    new TwoThreeDee(containerEl.current);
+  }, []);
 
   return (
-    <>
-      test
-    </>
+    <div style={{ width: '100vw', height: '100vh', overflow: 'hidden'}} ref={containerEl}></div>
   )
 }
 
-render(<Test/>,
+render(<Example/>,
   document.getElementById('root')
 );
 

@@ -16,7 +16,7 @@ class TwoThreeDee {
     // The sketch setup method 
     p5.setup = () => {
       // Creating and positioning the canvas
-      const canvas = p5.createCanvas(200, 200);
+      const canvas = p5.createCanvas(this.container.offsetWidth, this.container.offsetHeight);
       canvas.parent(this.container);
       // Configuring the canvas
       p5.background("white");
