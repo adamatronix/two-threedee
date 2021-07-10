@@ -1,5 +1,6 @@
 import * as P5 from 'p5';
 import Shape from './Shape';
+import ThreeDeeStage from './ThreeDeeStage';
 
 interface LooseObject {
   [key: string]: any
@@ -21,6 +22,7 @@ class TwoThreeDee {
     this.container = container;
     this.steps = steps || 0;
 
+    new ThreeDeeStage();
     new P5(this.sketch);
 
   }
