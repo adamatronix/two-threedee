@@ -1,5 +1,6 @@
 import * as P5 from 'p5';
 import Shape from './Shape';
+import ThreeDeeStage from './ThreeDeeStage';
 
 interface LooseObject {
   [key: string]: any
@@ -21,6 +22,7 @@ class TwoThreeDee {
     this.container = container;
     this.steps = steps || 0;
 
+    new ThreeDeeStage(this.container);
     new P5(this.sketch);
 
   }
@@ -33,6 +35,10 @@ class TwoThreeDee {
       // Creating and positioning the canvas
       const canvas = p5.createCanvas(this.container.offsetWidth, this.container.offsetHeight);
       canvas.parent(this.container);
+      canvas.style('position', 'absolute');
+      canvas.style('left', 0);
+      canvas.style('top', 0);
+      canvas.style('z-index', 1);
       // Configuring the canvas
       p5.background("white");
       self.currentShape = null;
