@@ -3,29 +3,26 @@ import * as THREE from 'three';
 class ThreeDeeShape { 
   scene: THREE.Scene;
 
-  constructor(scene: THREE.Scene) {
+  constructor(scene: THREE.Scene, splineArray: object[]) {
     this.scene = scene;
-    this.createShape();
+    this.createShape(splineArray);
   }
 
-  createShape = () => {
-    const length = 12, width = 8;
+  createShape = (splineArray: any[]) => {
 
     const shape = new THREE.Shape();
-    shape.moveTo( 0,0 );
-    shape.lineTo( 0, width );
-    shape.lineTo( length, width );
-    shape.lineTo( length, 0 );
-    shape.lineTo( 0, 0 );
+
+    splineArray.forEach((point,i) => {
+      if(i === 0) {
+        shape.moveTo( point.x, point.y );
+      } else {
+        shape.lineTo( point.x, point.y );
+      }
+    });
 
     const extrudeSettings = {
-      steps: 2,
+      steps: 10,
       depth: 16,
-      bevelEnabled: true,
-      bevelThickness: 1,
-      bevelSize: 1,
-      bevelOffset: 0,
-      bevelSegments: 1
     };
     
     const geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );

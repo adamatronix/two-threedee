@@ -16,13 +16,14 @@ class TwoThreeDee {
   currentShape: LooseObject;
   cachedPoint: PointObject;
   steps: number;
+  stage: ThreeDeeStage;
 
   // Normal signature with defaults
   constructor(container: HTMLDivElement, steps?: number) {
     this.container = container;
     this.steps = steps || 0;
 
-    new ThreeDeeStage(this.container);
+    this.stage = new ThreeDeeStage(this.container);
     new P5(this.sketch);
 
   }
@@ -60,8 +61,7 @@ class TwoThreeDee {
     }
   
     p5.mouseReleased = function() {
-    
-      console.log(self.currentShape.points);
+      self.stage.addShape(self.currentShape.points);
     }
   
     p5.mouseDragged = function() {
