@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import ThreeDeeShape from './ThreeDeeShape';
 
 class ThreeDeeStage {
   scene: THREE.Scene;
@@ -14,6 +15,7 @@ class ThreeDeeStage {
   start = () => {
     this.setupWorld();
     this.renderFrame();
+    new ThreeDeeShape(this.scene);
   }
 
   setupWorld = () => {
