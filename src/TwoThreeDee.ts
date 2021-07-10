@@ -5,13 +5,21 @@ interface LooseObject {
   [key: string]: any
 }
 
+interface PointObject {
+  x: number,
+  y: number
+}
+
 class TwoThreeDee {
   container: HTMLDivElement;
   currentShape: LooseObject;
+  cachedPoint: PointObject;
+  steps: number;
 
   // Normal signature with defaults
-  constructor(container: HTMLDivElement) {
+  constructor(container: HTMLDivElement, steps?: number) {
     this.container = container;
+    this.steps = steps || 0;
 
     new P5(this.sketch);
 
@@ -40,18 +48,38 @@ class TwoThreeDee {
     };
 
     p5.mousePressed = function () {
-      self.currentShape = new Shape(p5, {x: p5.mouseX, y: p5.mouseY})
+      const firstPoint = { x: p5.mouseX, y: p5.mouseY };
+      self.cachedPoint = firstPoint;
+      self.currentShape = new Shape(p5, firstPoint)
     }
   
     p5.mouseReleased = function() {
     
-
+      console.log(self.currentShape.points);
     }
   
     p5.mouseDragged = function() {
-      self.currentShape.addPoint({x: p5.mouseX, y: p5.mouseY});
+      const currentPoint = {x: p5.mouseX, y: p5.mouseY};
+      const distance = self.distanceBetweenTwoPoints(self.cachedPoint, currentPoint);
+
+      if(distance.dist > self.steps) {
+        self.currentShape.addPoint(currentPoint);
+        self.cachedPoint = currentPoint;
+      }
+      
     }
   };
+
+  distanceBetweenTwoPoints = (p1: PointObject, p2: PointObject) => {
+    const xDist = p2.x - p1.x;
+    const yDist = p2.y - p1.y;
+    const distance = Math.sqrt(xDist * xDist + yDist * yDist);
+    return {
+        xDist: xDist,
+        yDist: yDist,
+        dist: distance
+    };
+  }
 }
 
 export { TwoThreeDee };
