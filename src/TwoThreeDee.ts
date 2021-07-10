@@ -1,7 +1,13 @@
 import * as P5 from 'p5';
+import Shape from './Shape';
+
+interface LooseObject {
+  [key: string]: any
+}
 
 class TwoThreeDee {
   container: HTMLDivElement;
+  currentShape: LooseObject;
 
   // Normal signature with defaults
   constructor(container: HTMLDivElement) {
@@ -12,6 +18,7 @@ class TwoThreeDee {
   }
 
   sketch = (p5: P5) => {
+    const self = this;
 
     // The sketch setup method 
     p5.setup = () => {
@@ -20,12 +27,30 @@ class TwoThreeDee {
       canvas.parent(this.container);
       // Configuring the canvas
       p5.background("white");
+      self.currentShape = null;
     };
   
     // The sketch draw method
-    p5.draw = () => {
+    p5.draw = function () {
+      p5.clear();
+      if(self.currentShape) {
+        self.currentShape.draw();
+      }
    
     };
+
+    p5.mousePressed = function () {
+      self.currentShape = new Shape(p5, {x: p5.mouseX, y: p5.mouseY})
+    }
+  
+    p5.mouseReleased = function() {
+    
+
+    }
+  
+    p5.mouseDragged = function() {
+      self.currentShape.addPoint({x: p5.mouseX, y: p5.mouseY});
+    }
   };
 }
 
