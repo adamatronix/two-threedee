@@ -62,6 +62,7 @@ class TwoThreeDee {
   
     p5.mouseReleased = function() {
       self.stage.addShape(self.currentShape.points);
+      self.currentShape = null;
     }
   
     p5.mouseDragged = function() {

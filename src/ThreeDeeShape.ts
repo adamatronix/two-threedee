@@ -22,12 +22,12 @@ class ThreeDeeShape {
 
     const extrudeSettings = {
       steps: 10,
-      depth: 16,
+      depth: 400,
     };
     
-    const geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
-    const material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
-    const mesh = new THREE.Mesh( geometry, material ) ;
+    const geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings ); 
+    const cubeMat = new THREE.MeshPhongMaterial({color: '#FFF'});
+    const mesh = new THREE.Mesh( geometry, cubeMat ) ;
     this.scene.add( mesh );
 
   }

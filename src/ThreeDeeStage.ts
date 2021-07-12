@@ -30,6 +30,11 @@ class ThreeDeeStage {
     this.camera.position.set(1000, 1000, 1000);
     this.camera.lookAt(new THREE.Vector3(0,0,0));
 
+    const light = new THREE.PointLight( 0xffffff, 3, 1500 );
+    light.position.set( 1000, 1000, 1000 );
+    light.castShadow = true;
+    this.scene.add( light );
+
     //setup renderer
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     this.renderer.setClearColor( 0xffffff, 0 );
