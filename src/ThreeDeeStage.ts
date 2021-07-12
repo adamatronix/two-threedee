@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import ThreeDeeShape from './ThreeDeeShape';
 
 class ThreeDeeStage {
   scene: THREE.Scene;
@@ -14,6 +15,11 @@ class ThreeDeeStage {
   start = () => {
     this.setupWorld();
     this.renderFrame();
+    
+  }
+
+  addShape = (splineArray: object[]) => {
+    new ThreeDeeShape(this.scene, splineArray);
   }
 
   setupWorld = () => {
@@ -21,8 +27,13 @@ class ThreeDeeStage {
 
     //setup the camera
     this.camera = new THREE.PerspectiveCamera(60, this.container.offsetWidth / this.container.offsetHeight, 0.2, 5000);
-    this.camera.position.set(100, 100, 100);
+    this.camera.position.set(1000, 1000, 1000);
     this.camera.lookAt(new THREE.Vector3(0,0,0));
+
+    const light = new THREE.PointLight( 0xffffff, 3, 1500 );
+    light.position.set( 1000, 1000, 1000 );
+    light.castShadow = true;
+    this.scene.add( light );
 
     //setup renderer
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
