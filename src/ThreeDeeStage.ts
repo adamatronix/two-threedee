@@ -3,7 +3,7 @@ import ThreeDeeShape from './ThreeDeeShape';
 
 class ThreeDeeStage {
   scene: THREE.Scene;
-  camera: THREE.PerspectiveCamera;
+  camera: THREE.OrthographicCamera;
   renderer: THREE.WebGLRenderer;
   container: HTMLDivElement;
 
@@ -25,13 +25,18 @@ class ThreeDeeStage {
   setupWorld = () => {
     this.scene = new THREE.Scene();
 
-    //setup the camera
-    this.camera = new THREE.PerspectiveCamera(60, this.container.offsetWidth / this.container.offsetHeight, 0.2, 5000);
-    this.camera.position.set(1000, 1000, 1000);
-    this.camera.lookAt(new THREE.Vector3(0,0,0));
+    const geometry = new THREE.SphereGeometry( 50, 10, 10 );
+    const material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    const sphere = new THREE.Mesh( geometry, material );
+    this.scene.add( sphere );
 
-    const light = new THREE.PointLight( 0xffffff, 3, 1500 );
-    light.position.set( 1000, 1000, 1000 );
+    //setup the camera
+    this.camera = new THREE.OrthographicCamera( 0, this.container.offsetWidth, 0, this.container.offsetHeight, 0, 3000 );
+    this.camera.position.set(0, 2900, 0);
+    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+    const light = new THREE.PointLight( 0xffffff, 2 );
+    light.position.set( 0, 3000, 0 );
     light.castShadow = true;
     this.scene.add( light );
 
