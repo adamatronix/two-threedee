@@ -30,7 +30,7 @@ class ThreeDeeStage {
 
     const ground = new THREE.Mesh( planeGeometry, planeMaterial );
 
-    ground.position.set( this.container.offsetWidth/2, 0, (this.container.offsetHeight/2));
+    ground.position.set( this.container.offsetWidth/2, -100, (this.container.offsetHeight/2));
     ground.rotation.x -= Math.PI / 2;
 
     ground.castShadow = false;
@@ -43,7 +43,7 @@ class ThreeDeeStage {
     this.camera.position.set(0, 1000, 0);
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));*/
 
-    this.camera = new THREE.PerspectiveCamera( 53, this.container.offsetWidth / this.container.offsetHeight, 10, 3000 );
+    this.camera = new THREE.PerspectiveCamera( 49, this.container.offsetWidth / this.container.offsetHeight, 10, 3000 );
 		this.camera.position.set( this.container.offsetWidth/2, 1000, (this.container.offsetHeight/2));
     this.camera.lookAt(new THREE.Vector3(this.container.offsetWidth/2, 0, this.container.offsetHeight/2));
 
