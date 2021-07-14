@@ -24,7 +24,7 @@ class Shape {
   draw = () => {
     const p5 = this._p5;
     const self = this;
-    const c = p5.color(65);
+    const c = p5.color(210);
 
     p5.fill(c);
     p5.noStroke();

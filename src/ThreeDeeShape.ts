@@ -14,22 +14,24 @@ class ThreeDeeShape {
 
     splineArray.forEach((point,i) => {
       if(i === 0) {
-        shape.moveTo( point.x, -1 * point.y );
+        shape.moveTo( point.x, point.y );
       } else {
-        shape.lineTo( point.x, -1 * point.y );
+        shape.lineTo( point.x, point.y );
       }
     });
 
     const extrudeSettings = {
-      steps: 10,
-      depth: 100,
+      steps: 20,
+      depth: 20,
     };
     
     const geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings ); 
-    const cubeMat = new THREE.MeshPhongMaterial({color: '#CCC'});
+    const cubeMat = new THREE.MeshPhongMaterial({color: '#FFF'});
     const mesh = new THREE.Mesh( geometry, cubeMat ) ;
     mesh.rotation.x = Math.PI / 2;
-    mesh.position.y = 2000;
+    mesh.position.y = 20;
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
 
     this.scene.add( mesh );
 
