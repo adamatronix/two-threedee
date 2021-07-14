@@ -7,7 +7,7 @@ const Example = () => {
   const containerEl = useRef();
 
   useEffect(() => {
-    new TwoThreeDee(containerEl.current, 65);
+    new TwoThreeDee(containerEl.current);
   }, []);
 
   return (
